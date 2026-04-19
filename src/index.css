@@ -1,0 +1,435 @@
+@import "tailwindcss";
+
+/* ===== MEDIEVAL THEME GLOBAL STYLES ===== */
+
+:root {
+  --parchment: #f4e4c1;
+  --parchment-dark: #d4c4a1;
+  --wood-dark: #3e2723;
+  --wood-medium: #5d4037;
+  --wood-light: #795548;
+  --brass: #b8860b;
+  --brass-light: #daa520;
+  --brass-dark: #8b6914;
+  --gold: #ffd700;
+  --gold-dark: #b8960b;
+  --iron: #4a4a4a;
+  --iron-light: #6a6a6a;
+  --blood-red: #8b0000;
+  --ink: #2c1810;
+  --magic-blue: #4a90d9;
+  --magic-glow: #7bb8ff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Cinzel', serif;
+  background-color: var(--wood-dark);
+  color: var(--ink);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Parchment texture background */
+.parchment-bg {
+  background:
+    linear-gradient(135deg, rgba(244, 228, 193, 0.95) 0%, rgba(212, 196, 161, 0.95) 50%, rgba(244, 228, 193, 0.95) 100%),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(139, 119, 80, 0.03) 2px,
+      rgba(139, 119, 80, 0.03) 4px
+    );
+  position: relative;
+}
+
+.parchment-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(139, 119, 80, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(139, 119, 80, 0.08) 0%, transparent 40%),
+    radial-gradient(ellipse at 50% 80%, rgba(139, 119, 80, 0.12) 0%, transparent 45%);
+  pointer-events: none;
+}
+
+/* Main dark wood background */
+.wood-bg {
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(62, 39, 35, 1) 0px,
+      rgba(78, 52, 46, 1) 2px,
+      rgba(62, 39, 35, 1) 4px
+    ),
+    linear-gradient(180deg, #3e2723 0%, #4e342e 30%, #3e2723 60%, #4e342e 100%);
+  min-height: 100vh;
+}
+
+/* Metal/wood frame card */
+.medieval-card {
+  background: linear-gradient(145deg, #f4e4c1, #e8d5a8, #f0dfc0);
+  border: 8px solid var(--iron);
+  border-image: linear-gradient(145deg, #6a6a6a, #3a3a3a, #8a8a8a, #4a4a4a, #7a7a7a) 1;
+  box-shadow:
+    0 0 0 4px var(--brass),
+    0 0 0 8px var(--wood-dark),
+    0 0 0 10px var(--brass-dark),
+    0 12px 40px rgba(0, 0, 0, 0.6),
+    inset 0 0 60px rgba(139, 119, 80, 0.15);
+  position: relative;
+}
+
+.medieval-card::before {
+  content: '';
+  position: absolute;
+  inset: -12px;
+  border: 3px solid var(--brass-dark);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.medieval-card::after {
+  content: '';
+  position: absolute;
+  inset: -16px;
+  border: 2px solid rgba(184, 134, 11, 0.3);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Corner decorations */
+.corner-decoration {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-color: var(--brass);
+  z-index: 10;
+}
+
+.corner-tl {
+  top: -4px;
+  left: -4px;
+  border-top: 4px solid var(--brass);
+  border-left: 4px solid var(--brass);
+}
+
+.corner-tr {
+  top: -4px;
+  right: -4px;
+  border-top: 4px solid var(--brass);
+  border-right: 4px solid var(--brass);
+}
+
+.corner-bl {
+  bottom: -4px;
+  left: -4px;
+  border-bottom: 4px solid var(--brass);
+  border-left: 4px solid var(--brass);
+}
+
+.corner-br {
+  bottom: -4px;
+  right: -4px;
+  border-bottom: 4px solid var(--brass);
+  border-right: 4px solid var(--brass);
+}
+
+/* Medieval input styling */
+.medieval-input {
+  background: linear-gradient(180deg, #faf0d7, #f0dfc0);
+  border: 3px solid var(--brass);
+  font-family: 'Cinzel', serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--ink);
+  padding: 10px 14px;
+  text-align: center;
+  outline: none;
+  transition: all 0.3s ease;
+  box-shadow:
+    inset 0 2px 4px rgba(0, 0, 0, 0.15),
+    0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.medieval-input:focus {
+  border-color: var(--gold);
+  box-shadow:
+    inset 0 2px 4px rgba(0, 0, 0, 0.15),
+    0 0 12px rgba(255, 215, 0, 0.4),
+    0 0 24px rgba(184, 134, 11, 0.2);
+}
+
+.medieval-input::placeholder {
+  color: rgba(44, 24, 16, 0.35);
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* Big medieval button */
+.medieval-button {
+  font-family: 'Cinzel', serif;
+  font-weight: 800;
+  font-size: 1.1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: linear-gradient(180deg, #8b6914 0%, #6b4f10 40%, #5a4210 60%, #8b6914 100%);
+  border: 3px solid var(--brass-light);
+  padding: 16px 40px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 215, 0, 0.3),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+}
+
+.medieval-button:hover {
+  background: linear-gradient(180deg, #a07a18 0%, #7b5a12 40%, #6a4d12 60%, #a07a18 100%);
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(255, 215, 0, 0.2),
+    inset 0 1px 0 rgba(255, 215, 0, 0.4),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+  color: #ffe44d;
+}
+
+.medieval-button:active {
+  transform: translateY(1px);
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(0, 0, 0, 0.2),
+    inset 0 -1px 0 rgba(255, 215, 0, 0.2);
+}
+
+/* Button shine effect */
+.medieval-button::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 40%,
+    rgba(255, 215, 0, 0.1) 45%,
+    rgba(255, 215, 0, 0.2) 50%,
+    rgba(255, 215, 0, 0.1) 55%,
+    transparent 60%
+  );
+  animation: shine 4s ease-in-out infinite;
+}
+
+@keyframes shine {
+  0%, 100% { transform: translateX(-100%); }
+  50% { transform: translateX(100%); }
+}
+
+/* Result panel */
+.result-panel {
+  background: linear-gradient(180deg, #faf0d7, #f0dfc0, #e8d5a8);
+  border: 3px solid var(--brass);
+  position: relative;
+  box-shadow:
+    inset 0 2px 8px rgba(0, 0, 0, 0.1),
+    0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.result-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--brass), transparent);
+}
+
+/* Step animation */
+.step-item {
+  animation: fadeInUp 0.5s ease forwards;
+  opacity: 0;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Magic glow for results */
+.magic-glow {
+  animation: magicPulse 2s ease-in-out infinite;
+}
+
+@keyframes magicPulse {
+  0%, 100% { text-shadow: 0 0 5px rgba(184, 134, 11, 0.3); }
+  50% { text-shadow: 0 0 15px rgba(184, 134, 11, 0.6), 0 0 30px rgba(255, 215, 0, 0.2); }
+}
+
+/* Scrollbar medieval style */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--wood-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--brass), var(--brass-dark));
+  border: 2px solid var(--wood-dark);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--brass-light), var(--brass));
+}
+
+/* Divider ornament */
+.ornament-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.ornament-divider::before,
+.ornament-divider::after {
+  content: '';
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--brass), transparent);
+}
+
+/* Floating particles */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.6; }
+  50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--gold);
+  border-radius: 50%;
+  animation: float 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Scroll styling for result */
+.result-scroll {
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.result-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.result-scroll::-webkit-scrollbar-track {
+  background: rgba(62, 39, 35, 0.2);
+  border-radius: 4px;
+}
+
+.result-scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--brass), var(--brass-dark));
+  border-radius: 4px;
+}
+
+/* Sword icon animation */
+@keyframes swordSwing {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+}
+
+.sword-icon {
+  display: inline-block;
+  animation: swordSwing 2s ease-in-out infinite;
+}
+
+/* Header glow */
+.header-glow {
+  text-shadow:
+    0 0 10px rgba(255, 215, 0, 0.3),
+    0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Decorative border pattern */
+.border-pattern {
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--brass) 0px,
+    var(--brass) 8px,
+    transparent 8px,
+    transparent 16px
+  );
+  height: 4px;
+}
+
+/* Number input spinner hide */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Error shake */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+  20%, 40%, 60%, 80% { transform: translateX(4px); }
+}
+
+.shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+/* Tooltip medieval */
+.tooltip-medieval {
+  position: relative;
+}
+
+.tooltip-medieval::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--wood-dark);
+  color: var(--gold);
+  padding: 4px 12px;
+  border: 1px solid var(--brass);
+  font-size: 0.75rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.tooltip-medieval:hover::after {
+  opacity: 1;
+}
